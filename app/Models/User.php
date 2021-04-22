@@ -27,6 +27,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'telefone',
         'password',
     ];
 
@@ -36,10 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        'password'
     ];
 
     /**
@@ -47,23 +45,34 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts = [];
 
     /**
      * The accessors to append to the model's array form.
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    protected $appends = [];
 
     public function responsavel_atual(){
         $result = $this->select('users.id', DB::raw('COUNT(tickets.id) AS quant'))
             ->leftJoin('tickets', 'tickets.id_user', '=', 'users.id')    
-            ->groupBy('users.id')->orderBy('quant')->limit(1)->get();       
-        return($result[0]->id);
+            ->where('users.status','=','1')
+            ->groupBy('users.id')->orderBy('quant')->limit(1)->get();   
+        if(isset($result[0])){
+            return($result[0]->id);
+        }else{
+            return(NULL);
+        }           
+    }
+
+    public function get_nome_responsavel($id){
+        $result = $this->select('name')->where('id',$id)->get();   
+
+        if(isset($result[0])){
+            return($result[0]->name);
+        }else{
+            return(NULL);
+        }    
     }
 }

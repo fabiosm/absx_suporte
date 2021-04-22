@@ -16,14 +16,23 @@ class Tickets extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_user')->unsigned()->nullable();
-            $table->foreign('id_user')->references('id')
-                ->on('users')
+            /*
+            $table->foreign('id_user')->references('id')->on('users')
                 ->onDelete('restrict')
                 ->onUpdate('restrict')
                 ->default(NULL);
+            */
+
             $table->string('assunto');
             $table->text('descricao');
+
             $table->tinyInteger('status')->default(1);
+            /*
+            $table->foreign('status')->references('id')->on('status_tickets')
+            ->onDelete('restrict')
+            ->onUpdate('restrict')            
+            */
+     
             $table->timestamps();
         });
     }

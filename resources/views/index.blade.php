@@ -42,7 +42,18 @@
                                         @endforeach  
                                     </div>
                                 </div>	                          
-                                @endif  							
+                                @endif  
+                                
+                                @if (session('msg'))
+                                <div class="col-lg-6">	        
+                                    <div class="alert alert-{{ session('cor') }} alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>                                  
+                                        <strong>{!! session('msg') !!}</strong>                                  
+                                    </div>
+                                </div>	                              
+                                @endif
                                 			
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary">

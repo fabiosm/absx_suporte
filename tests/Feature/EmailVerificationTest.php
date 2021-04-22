@@ -23,7 +23,7 @@ class EmailVerificationTest extends TestCase
         }
 
         $user = User::factory()->withPersonalTeam()->create([
-            'email_verified_at' => null,
+
         ]);
 
         $response = $this->actingAs($user)->get('/email/verify');
@@ -40,7 +40,7 @@ class EmailVerificationTest extends TestCase
         Event::fake();
 
         $user = User::factory()->create([
-            'email_verified_at' => null,
+
         ]);
 
         $verificationUrl = URL::temporarySignedRoute(
@@ -64,7 +64,7 @@ class EmailVerificationTest extends TestCase
         }
 
         $user = User::factory()->create([
-            'email_verified_at' => null,
+  
         ]);
 
         $verificationUrl = URL::temporarySignedRoute(

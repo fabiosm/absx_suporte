@@ -21,7 +21,7 @@
                     </a>                   
                 </div><!-- /.panel-heading -->
                 <div class="panel-body">
-                    <!-- Chamados Aberto -->
+                @foreach($tickets as $ticket)
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -30,8 +30,8 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?=number_format(10, 0, ',', '.');?></div>
-                                        <div>Abertos</div>
+                                        <div class="huge">{{ number_format($ticket->quant, 0, ',', '.')}}</div>
+                                        <div>{{ $status->get_nome($ticket->status)}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -44,80 +44,10 @@
                             </a>
                         </div>
                     </div>
-    
-                    <!-- Chamados Pendentes -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">
-                                            <?=number_format(12, 0, ',', '.');?>
-                                        </div>
-                                        <div>Em andamento</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Ver Detalhes</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>            
-            
-                    <!-- Chamados em Andamento -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><?=number_format(10, 0, ',', '.');?></div>
-                                        <div>Atrasados</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Ver Detalhes</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                @endforeach   
+         
           
-                    <!-- Chamados Fechados -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><?=number_format(10, 0, ',', '.');?></div>
-                                        <div>Encerrados</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Ver Detalhes</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+ 
                 </div><!-- ./panel-body -->
             </div><!-- ./panel panel-default -->	
         </div><!-- ./row -->

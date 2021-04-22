@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TicketResquest;
 use App\Models\ModelTicket;
 use App\Models\User;
+use Session;
 
 class TicketController extends Controller{
 
@@ -22,18 +23,13 @@ class TicketController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view('index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function index($id_user=NULL, $id_ticket=NULL){
+        if(!empty($id_user) && !empty($id_ticket)){
+            $vendedor = $this->objUser->get_nome_responsavel($id_user);
+            return view('index',compact('ids'));
+        }else{
+            return view('index');
+        }
     }
 
     /**
@@ -46,27 +42,29 @@ class TicketController extends Controller{
         // Pega o ID do usuário com menos chamados:
         $id_user = $this->objUser->responsavel_atual();
      
-        $cad = $this->objTicket->create([
-            'id_user'=>$id_user,
-            'assunto'=>$request->assunto,
-            'descricao'=>$request->descricao
-        ]);
-        if($cad){
-            return redirect('/');
-        }else{
-            echo 'ERRO AO CADASTRAR.';
-        }
-    }
+        if(!empty($id_user)){
+            $cad = $this->objTicket->create([
+                'id_user'=>$id_user,
+                'assunto'=>$request->assunto,
+                'descricao'=>$request->descricao
+            ]);
+     
+            if($cad){
+                $id_ticket        = $cad->id; 
+                $nome_responsavel = $this->objUser->get_nome_responsavel($id_user);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+                $msg  = 'Ticket cadastrado com sucesso.<br/>Ticket N° '.$id_ticket;
+                $msg .= '<br/>Venderdor Responsável: '.$nome_responsavel;     
+                $cor  = 'success';    
+            }else{
+                $msg = 'ERRO AO CADASTRAR.';
+                $cor = 'danger';
+            }
+        }else{
+            $msg = 'Nenhum vendedor disponível para atender esse ticket... Tente mais tarde.';
+            $cor = 'danger';
+        }
+        return redirect('/')->with(['msg'=>$msg, 'cor'=>$cor]);
     }
 
     /**
@@ -88,17 +86,6 @@ class TicketController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function update(TicketResquest $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
     {
         //
     }

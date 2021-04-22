@@ -13,10 +13,16 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::resource('/',TicketController::class);
+
+/*
+Route::get('user/registrar', 'App\Http\Controllers\UserController@registrar');
+Route::post('user/registrar', 'App\Http\Controllers\UserController@store');
+*/
+
 Route::resource('/user',UserController::class)->middleware('auth');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function (){
     return view('dashboard');
 })->name('dashboard');
