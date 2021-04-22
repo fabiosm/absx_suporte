@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\ModelTicket;
 
 class UserController extends Controller
 {
+
+    private $objTicket;
+
+    public function __construct()
+    {
+        $this->objTicket = new ModelTicket;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        echo 'ENTROU';
+        $tickets = $this->objTicket->quant_por_status();
+        /*
+        foreach($tickets AS $t){
+            echo $t->status;
+            echo '<br/>';
+            echo $t->quant;
+        }
+        */
+
+        return view('exibe_tickets');
     }
 
     /**

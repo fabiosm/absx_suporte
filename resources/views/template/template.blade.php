@@ -30,21 +30,26 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" style="margin-bottom:0">                     
             <ul class="nav navbar-top-links navbar-right">
+            @if(Auth::check())
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>        
-                        fabio_sm
+                        {{auth()->user()->name}}
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">    
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <a href="">
-                                <i class="fa fa-sign-out fa-fw"></i> Sair
-                            </a>
+                        <li>                            
+                            <!-- Logout -->
+                            <form method="POST" id="form_logout" action="{{ route('logout') }}">
+                                @csrf                          
+                                <a href="javascript:" onClick="$('#form_logout').submit();">
+                                    <i class="fa fa-sign-out fa-fw"></i> Sair
+                                </a>
+                            </form>
                         </li>
                     </ul><!-- /.dropdown-user -->
                 </li><!-- /.dropdown -->
+            @endif
             </ul><!-- /.navbar-top-links -->
     
             <div class="navbar-default sidebar" role="navigation">

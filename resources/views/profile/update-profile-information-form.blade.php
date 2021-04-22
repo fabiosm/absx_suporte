@@ -42,12 +42,6 @@
                     {{ __('Select A New Photo') }}
                 </x-jet-secondary-button>
 
-                @if ($this->user->profile_photo_path)
-                    <x-jet-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
-                    </x-jet-secondary-button>
-                @endif
-
                 <x-jet-input-error for="photo" class="mt-2" />
             </div>
         @endif

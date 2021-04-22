@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -58,4 +59,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function responsavel_atual(){
+        $result = $this->select('users.id', DB::raw('COUNT(tickets.id) AS quant'))
+            ->leftJoin('tickets', 'tickets.id_user', '=', 'users.id')    
+            ->groupBy('users.id')->orderBy('quant')->limit(1)->get();       
+        return($result[0]->id);
+    }
 }
