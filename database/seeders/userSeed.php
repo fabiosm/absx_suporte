@@ -20,7 +20,7 @@ class userSeed extends Seeder
             'email' => 'absx.suporte@mailinator.com',
             'telefone'=>'71999409774',
             'password' => Hash::make('absx.123'),
-            'status' => '2'
+            'perfil' => '2'
         ]);
         User::create([
             'name' => 'Felipe',

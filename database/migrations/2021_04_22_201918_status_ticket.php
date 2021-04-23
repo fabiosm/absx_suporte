@@ -18,7 +18,8 @@ class StatusTicket extends Migration
             $table->string('nome');
             $table->string('cor');
             $table->timestamps();
-        });    }
+        });    
+    }
 
     /**
      * Reverse the migrations.
@@ -27,6 +28,6 @@ class StatusTicket extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('status_tickets');
     }
 }
