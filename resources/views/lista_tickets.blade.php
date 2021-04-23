@@ -59,14 +59,16 @@
                         </thead>
                         <tbody>	
                         @foreach ($tickets as $tic)   
-                            <tr align="center">                                 
+                            <tr align="center" @if($tic->atrasado==1) class="danger" @endif>                                 
                                 <td>
                                     <a href="javascript:" data-toggle="modal" data-target="#chamado" data-toggle="tooltip"
                                     data-id="{{$tic->id}}" data-assunto="{{$tic->assunto}}" data-descricao="{{$tic->descricao}}" 
                                     data-data="{{date('d/m/Y', strtotime($tic->created_at))}}" title="Ticket" data-placement="right">
-                                        {{$tic->id}}                             
+                                        {{$tic->id}}  
+                                    @if($tic->atrasado==1)                           
                                         <img src="{{url('img/exclamacao.gif')}}" 
-                                        alt="TICKET ATRASADO!" style="height:25px;"/>
+                                        alt="TICKET ATRASADO!" TICKET ATRASADO!" style="height:25px;"/>
+                                    @endif
                                     </a>				
                                 </td>
                                 <td>{{$tic->assunto}}</td>	
@@ -112,12 +114,15 @@
                     <div class="col-md-12 text-right">
                         <input type="hidden" id="id_ticket" name="id_ticket" value="" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <!-- Caso seja usuário pendente -->
+                @if($id <> 3)
                         <button type="button" onClick="btn_confirmar(1);" class="btn btn-primary" style="float:left;">Resolvido</button>
+                    @if($id == 1)
                         <button type="button" id="btn-devolver" onClick="btn_confirmar(2);;" style="float:left;" class="btn btn-warning">
                             Em andamento
                         </button>
+                    @endif
                     </div>
+                @endif
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

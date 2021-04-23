@@ -17,17 +17,17 @@ class statusSeed extends Seeder
         ModelStatus_ticket::create([
             'id'   => '1',
             'nome' => 'Em aberto',
-            'cor'  => 'yellow'
+            'cor'  => 'red'
         ]);
         ModelStatus_ticket::create([
             'id'   => '2',
             'nome' => 'Em andamento',
-            'cor'  => 'green'
+            'cor'  => 'yellow'
         ]);
         ModelStatus_ticket::create([
             'id'   => '3',
             'nome' => 'Resolvido',  
-            'cor'  => 'red'
+            'cor'  => 'green'
         ]);
     }
 }

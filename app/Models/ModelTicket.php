@@ -20,7 +20,8 @@ class ModelTicket extends Model
     }
 
     public function lista_por_status($id_user, $id_status){
-        $result = $this->all()->where('status','=',$id_status)->where('id_user','=',$id_user);
+        $result = $this->select(DB::raw('id, assunto, descricao, created_at, IF(DATE(created_at)<DATE(NOW()),1,0) AS atrasado'))
+            ->where('status','=',$id_status)->where('id_user','=',$id_user)->get();
         return($result);
     }
 

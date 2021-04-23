@@ -36,7 +36,7 @@ class UserController extends Controller
     public function show($id){
         $status  = $this->objStatus->get_nome($id);
         $tickets = $this->objTicket->lista_por_status(auth()->user()->id, $id);   
-        return view('lista_tickets', compact('status','tickets'));
+        return view('lista_tickets', compact('status','tickets','id'));
     }
 
     public function muda_status($id_status, $id_ticket){
