@@ -21,9 +21,10 @@
                     </a>                   
                 </div><!-- /.panel-heading -->
                 <div class="panel-body">
+            @if(count($tickets))
                 @foreach($tickets as $ticket)
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
+                        <div class="panel panel-{{ $status->get_cor($ticket->status)}}">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
@@ -35,7 +36,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="">
+                            <a href="{{url('/user/'.$ticket->status)}}">
                                 <div class="panel-footer">
                                     <span class="pull-left">Ver Detalhes</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -45,9 +46,16 @@
                         </div>
                     </div>
                 @endforeach   
-         
-          
- 
+            @else
+                <div class="col-lg-12">	        
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>                                  
+                        <strong>Você não possui nenhum chamado!</strong>                                  
+                    </div>
+                </div>	 
+            @endif     
                 </div><!-- ./panel-body -->
             </div><!-- ./panel panel-default -->	
         </div><!-- ./row -->

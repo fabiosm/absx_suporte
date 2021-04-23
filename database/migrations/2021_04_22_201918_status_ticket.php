@@ -16,6 +16,7 @@ class StatusTicket extends Migration
         Schema::create('status_tickets', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('cor');
             $table->timestamps();
         });    }
 

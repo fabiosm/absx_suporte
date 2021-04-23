@@ -21,4 +21,14 @@ class ModelStatus_ticket extends Model
             return(NULL);
         }    
     }
+
+    public function get_cor($id){
+        $result = $this->select('cor')->where('id',$id)->get();   
+
+        if(isset($result[0])){
+            return($result[0]->cor);
+        }else{
+            return(NULL);
+        }    
+    }
 }

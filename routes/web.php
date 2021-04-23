@@ -15,13 +15,10 @@ use App\Http\Controllers\UserController;
 */
 Route::resource('/',TicketController::class);
 
-/*
-Route::get('user/registrar', 'App\Http\Controllers\UserController@registrar');
-Route::post('user/registrar', 'App\Http\Controllers\UserController@store');
-*/
+Route::get('/user/{id_status}/{id_ticket}/status',[UserController::class, 'muda_status'])
+    ->middleware('auth');
 
 Route::resource('/user',UserController::class)->middleware('auth');
-
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function (){
     return view('dashboard');

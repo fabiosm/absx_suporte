@@ -18,4 +18,14 @@ class ModelTicket extends Model
                 ->groupBy('status')->where('id_user','=',$id_user)->get();
         return($result);
     }
+
+    public function lista_por_status($id_user, $id_status){
+        $result = $this->all()->where('status','=',$id_status)->where('id_user','=',$id_user);
+        return($result);
+    }
+
+    public function muda_status($id_status, $id_ticket){
+        $edit = $this->where(['id'=>$id_ticket])->update(['status'=>$id_status]);
+        return($edit);
+    }
 }
