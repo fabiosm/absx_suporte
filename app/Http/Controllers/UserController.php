@@ -51,6 +51,14 @@ class UserController extends Controller{
         return back();
     }
 
+    public function usuarios(){
+        $perfil  = $this->objUser->get_perfil(auth()->user()->id);      
+        if($perfil<>2){ return redirect('/');}
+
+        $users = $this->objUser->listar();
+        return view('usuarios', compact('users'));
+    }
+
     public function store(Request $request){
   
     }

@@ -38,7 +38,13 @@
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">  
-                        <li>Usuários</li>  
+                    @if(auth()->user()->perfil==2)
+                        <li>
+                            <a href="{{url('usuarios')}}">
+                                <i class="fa fa-users fa-fw"></i> Usuários
+                            </a>
+                        </li>  
+                    @endif
                         <li>                            
                             <!-- Logout -->
                             <form method="POST" id="form_logout" action="{{ route('logout') }}">

@@ -84,7 +84,8 @@ class User extends Authenticatable{
     }
 
     public function listar(){
-        $result = $this->select(DB::raw('id, name'))->orderBy('name')->get();
+        $result = $this->select(DB::raw('id, name, email, telefone, perfil, status'))
+                    ->orderBy('name')->get();
         return($result);
     }
 }
