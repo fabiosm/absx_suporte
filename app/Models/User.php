@@ -11,8 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable{
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -57,7 +56,7 @@ class User extends Authenticatable
     public function responsavel_atual(){
         $result = $this->select('users.id', DB::raw('COUNT(tickets.id) AS quant'))
             ->leftJoin('tickets', 'tickets.id_user', '=', 'users.id')    
-            ->where('users.status','=','1')
+            ->where('users.status','=','1')->where('users.perfil','=','1')
             ->groupBy('users.id')->orderBy('quant')->limit(1)->get();   
         if(isset($result[0])){
             return($result[0]->id);
@@ -68,11 +67,24 @@ class User extends Authenticatable
 
     public function get_nome_responsavel($id){
         $result = $this->select('name')->where('id',$id)->get();   
-
         if(isset($result[0])){
             return($result[0]->name);
         }else{
             return(NULL);
         }    
+    }
+
+    public function get_perfil($id){
+        $result = $this->select('perfil')->where('id',$id)->get();   
+        if(isset($result[0])){
+            return($result[0]->perfil);
+        }else{
+            return(NULL);
+        }    
+    }
+
+    public function listar(){
+        $result = $this->select(DB::raw('id, name'))->orderBy('name')->get();
+        return($result);
     }
 }

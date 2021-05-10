@@ -7,24 +7,31 @@ use App\Models\User;
 use App\Models\ModelTicket;
 use App\Models\ModelStatus_ticket;
 
-class UserController extends Controller
-{
-
+class UserController extends Controller{
     private $objTicket;
     private $objStatus;
+    private $objUser;
 
-    public function __construct()
-    {
+    public function __construct(){
+        $this->objUser   = new User;
         $this->objTicket = new ModelTicket;
         $this->objStatus = new ModelStatus_ticket;
     }
 
-
-    public function index()
-    {      
-        $tickets = $this->objTicket->quant_por_status(auth()->user()->id);  
+    public function index(){      
+        $perfil  = $this->objUser->get_perfil(auth()->user()->id);        
         $status  = $this->objStatus;
-        return view('exibe_tickets', compact('tickets', 'status'));
+
+        if($perfil<>2){
+            $tickets = $this->objTicket->quant_por_status(auth()->user()->id);              
+            return view('exibe_tickets', compact('tickets', 'status'));
+        }else{
+            $users = $this->objUser->listar();
+            foreach($users AS $user){
+                $tickets[$user->id] = $this->objTicket->quant_por_status($user->id);      
+            }
+            return view('admin_tickets', compact('users', 'tickets', 'status'));
+        }
     }
 
     /**

@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TicketResquest;
 use App\Models\ModelTicket;
 use App\Models\User;
-use Session;
 
 class TicketController extends Controller{
 
     private $objTicket;
     private $objUser;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->objTicket = new ModelTicket;
         $this->objUser   = new User;
     }

@@ -37,7 +37,8 @@
                         {{auth()->user()->name}}
                         <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">    
+                    <ul class="dropdown-menu dropdown-user">  
+                        <li>Usuários</li>  
                         <li>                            
                             <!-- Logout -->
                             <form method="POST" id="form_logout" action="{{ route('logout') }}">
