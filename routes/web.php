@@ -23,9 +23,6 @@ Route::get('/user/{id_status}/{id_ticket}/status',[UserController::class, 'muda_
 
 Route::get('/usuarios',[UserController::class, 'usuarios'])->middleware('auth');
     
-
-
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function (){
     return view('dashboard');
 })->name('dashboard');

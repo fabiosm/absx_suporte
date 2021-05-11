@@ -27,7 +27,7 @@
                                 <td>{{$user->perfil==1 ? 'Usuário Comum' : 'Administrador'}}</td>
                                 <td>{{$user->status==1 ? 'Ativo' : 'Inativo'}}</td>
                                 <td>
-                                    <a href="">
+                                    <a href="javascript:" data-toggle="modal" data-target="#modal-user">
                                         <i class="fa fa-edit fa-fw"></i> Editar
                                     </a>
                                 </td>
@@ -41,23 +41,31 @@
     </div><!-- /.row -->
 
     <!-- Modal de NOVO ticker -->
-    <div class="modal fade" id="addSetor" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modal-user" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 id="modal-title">Vincular novo setor - </h4>
+                    <h4 id="modal-title">Editar usuário</h4>
                 </div>
                 <form action="" method="post">
-                    <div class="modal-body">					
-                        <div class="form-group">
-                            <select name="idSetor" id="setor" class="form-control" required>
-                                <option value="">Selecione o Setor</option>       
-                            </select>
-                            <input type="hidden" name="idUser" id="idUser">
-                        </div>            
+                    <div class="modal-body">	
+                        <div class="row">		
+                            <div class="form-group col-lg-6">
+                                <label id="tipoSit">Nome:</label>
+                                <input class="form-control" id="name" name="name" type="text" value="" />
+                            </div>  
+                            <div class="form-group col-lg-6">
+                                <label id="tipoSit">E-mail:</label>
+                                <input class="form-control" id="email" name="email" type="text" value="" />
+                            </div>    
+                            <div class="form-group col-lg-6">
+                                <label id="tipoSit">Telefone:</label>
+                                <input class="form-control" id="telefone" name="telefone" type="text" value="" />
+                            </div>   
+                        </div><!-- row -->		       
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
