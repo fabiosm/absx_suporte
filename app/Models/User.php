@@ -88,4 +88,9 @@ class User extends Authenticatable{
                     ->orderBy('name')->get();
         return($result);
     }
+
+    public function editar($id, $dados){
+        $edit = $this->where(['id'=>$id])->update($dados);
+        return($edit);
+    }
 }

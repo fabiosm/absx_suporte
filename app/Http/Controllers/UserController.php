@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Models\ModelTicket;
 use App\Models\ModelStatus_ticket;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller{
     private $objTicket;
@@ -34,12 +35,6 @@ class UserController extends Controller{
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id){
         $status  = $this->objStatus->get_nome($id);
         $tickets = $this->objTicket->lista_por_status(auth()->user()->id, $id);   
@@ -59,7 +54,30 @@ class UserController extends Controller{
         return view('usuarios', compact('users'));
     }
 
-    public function store(Request $request){
-  
+    public function store(UserRequest $request){
+        $perfil  = $this->objUser->get_perfil(auth()->user()->id); 
+        if($perfil<>2){ return redirect('/');}
+
+
+        if(isset($request->status)){ $status=1;}else{ $status=0;}
+        if(isset($request->perfil)){ $perfil=2;}else{ $perfil=1;}
+
+        $dados = array(
+            'name'=>$request->name, 'email'=>$request->email, 
+            'telefone'=>$request->telefone, 
+            'perfil'=>$perfil, 'status'=>$status
+        );
+
+        // EDIÇÃO:
+        if(!empty($request->id)){
+            $this->objUser->editar($request->id,$dados);
+            $msg = 'Usuário editado com sucesso.';
+        // NOVO:
+        }else{
+            $dados['password'] = Hash::make('absx.123');
+            $this->objUser->create($dados);
+            $msg = 'Usuário cadastrado com sucesso. Senha padrão: absx.123';
+        }
+        return redirect('/usuarios')->with(['msg'=>$msg]);
     }
 }

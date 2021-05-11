@@ -45,6 +45,11 @@
                             </a>
                         </li>  
                     @endif
+                        <li>
+                            <a href="{{url('user/profile')}}">
+                                <i class="fa fa-address-card fa-fw"></i> Perfil
+                            </a>
+                        </li>  
                         <li>                            
                             <!-- Logout -->
                             <form method="POST" id="form_logout" action="{{ route('logout') }}">

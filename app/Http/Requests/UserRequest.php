@@ -4,15 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TicketResquest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -24,16 +23,17 @@ class TicketResquest extends FormRequest
     public function rules()
     {
         return [
-            'assunto'=>'required', 
-            'descricao'=>'required'
+            'name'=>'required', 
+            'email'=>'required',
+            'telefone'=>'required'
         ];
     }
 
-    public function messages()
-    {
+    public function messages(){
         return [
-            'assunto.required' => 'Infome o assunto',
-            'descricao.required' => 'Informe a descrição',
+            'name.required' => 'Infome o nome',
+            'email.required' => 'Informe o e-mail',
+            'telefone.required' => 'Informe a telefone',
         ];
     }
 }
