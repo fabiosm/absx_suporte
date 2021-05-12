@@ -22,10 +22,10 @@ Backend: PHP - Laravel 8
 - Acesso via AWS: http://ec2-35-172-137-202.compute-1.amazonaws.com/
 
 - Usuários de acesso para teste: 
-	marcos.absx@mailinator.com
-	joao.absx@mailinator.com
-    felipe.absx@mailinator.com
-    absx.suporte@mailinator.com
+	- marcos.absx@mailinator.com 
+	- joao.absx@mailinator.com 
+    - felipe.absx@mailinator.com 
+    - absx.suporte@mailinator.com 
 
 - A senha padrão de todos é: absx.123
 
